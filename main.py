@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
 from difflib import SequenceMatcher
@@ -11,6 +12,15 @@ app = FastAPI(
     title="Skill-Based Company Recommender API",
     description="Give your skills, get top company recommendations based on salary and stack similarity.",
     version="1.0"
+)
+
+# ✅ Allow everything (all origins, headers, and methods)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],      # Allow all origins
+    allow_credentials=True,   # Allow cookies and credentials
+    allow_methods=["*"],      # Allow all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],      # Allow all headers
 )
 
 # Define request model
